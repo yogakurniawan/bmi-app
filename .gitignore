@@ -1,0 +1,6 @@
+/server/node_modules
+/server/templateLogReg
+/server/.env
+/server/preview.png
+/client/node_modules
+/.idea
