@@ -6,7 +6,7 @@
   "author": "Nicolas Taboada",
   "license": "none",
   "scripts": {
-    "start": "node app",
+    "start": "nodemon app",
     "watch": "nodemon app && mongod"
   },
   "dependencies": {

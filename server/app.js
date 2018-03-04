@@ -1,5 +1,5 @@
-var app = express();
 var express = require('express');
+var app = express();
 var dotenv = require('dotenv').config();
 var bodyParser = require('body-parser');
 var session = require('express-session');
