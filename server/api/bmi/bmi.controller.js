@@ -6,10 +6,10 @@ exports.getBMI = function (req, res) {
     var mass = req.body.mass;
     var height = req.body.height;
 
-    if(unit === BMI.UNITS.METRIC){
+    if(unit === BMI.units.METRIC){
         bmi = BMI.metricUnits(mass, height);
         res.status(200);
-    } else if( unit === BMI.UNITS.USC){
+    } else if( unit === BMI.units.USC){
         bmi = BMI.uscUnits(mass, height);
         res.status(200);
     } else {

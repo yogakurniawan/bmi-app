@@ -1,28 +1,29 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
-import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import createReducer from './reducers';
+import middleware from './middleware';
 
-import weatherReducer from './reducers/weatherReducer'
+export default function configureStore(initialState = {}) {
+  const middlewares = [
+    middleware,
+    thunk,
+  ];
 
-export function configureStore(history, initialState) {
+  const enhancers = [
+    applyMiddleware(...middlewares),
+  ];
 
-    const reducer = combineReducers({
-        weatherReducer,
-        routing: routerReducer
-    })
+  const composeEnhancers =
+    process.env.NODE_ENV !== 'production' &&
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  const store = createStore(
+    createReducer,
+    initialState,
+    composeEnhancers(...enhancers)
+  );
 
-    const store = createStore(
-        reducer,
-        initialState,
-        composeEnhancers(
-            applyMiddleware(
-                thunkMiddleware,
-                routerMiddleware(history)
-            )
-        )
-    )
-
-    return store
+  return store;
 }
